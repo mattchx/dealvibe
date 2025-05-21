@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DealVibe - Discover and Share Great Deals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            padding-top: 80px;
+        }
+        .header-gradient {
+            background: linear-gradient(to right, #2563EB, #1E40AF);
+        }
+        .deal-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .form-input:focus, .search-input:focus, .filter-select:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+            border-color: #2563EB;
+        }
+        @media (max-width: 640px) {
+            body {
+                padding-top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header-gradient fixed top-0 left-0 right-0 h-20 shadow-md z-50">
+        <div class="container mx-auto px-4 h-full flex items-center justify-between">
+            <!-- Logo -->
+            <a href="/" class="text-white font-bold text-2xl">DealVibe</a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="text-white hover:text-blue-200 hover:underline transition">Tech</a>
+                <a href="#" class="text-white hover:text-blue-200 hover:underline transition">Fashion</a>
+                <a href="#" class="text-white hover:text-blue-200 hover:underline transition">Travel</a>
+                <a href="#" class="text-white hover:text-blue-200 hover:underline transition">Experiences</a>
+                <a href="#" class="text-white hover:text-blue-200 hover:underline transition">All</a>
+            </nav>
+            
+            <!-- Auth Button - Desktop -->
+            <button id="auth-btn" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                Sign In with GitHub
+            </button>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-blue-800 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-8">
+            <span class="text-white font-bold text-2xl">Menu</span>
+            <button id="close-menu-btn" class="text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="flex flex-col space-y-4">
+            <a href="#" class="text-white hover:text-blue-200 text-lg">Tech</a>
+            <a href="#" class="text-white hover:text-blue-200 text-lg">Fashion</a>
+            <a href="#" class="text-white hover:text-blue-200 text-lg">Travel</a>
+            <a href="#" class="text-white hover:text-blue-200 text-lg">Experiences</a>
+            <a href="#" class="text-white hover:text-blue-200 text-lg">All</a>
+        </nav>
+        
+        <div class="mt-8">
+            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-md text-base font-medium transition">
+                Sign In with GitHub
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Deal Submission Form -->
+        <section class="max-w-2xl mx-auto mb-12">
+            <div class="bg-gray-100 rounded-lg shadow-sm p-6">
+                <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Share a Deal</h2>
+                <form id="deal-form" class="space-y-4">
+                    <div>
+                        <input type="text" id="deal-title" placeholder="Deal Title" required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none">
+                    </div>
+                    <div>
+                        <textarea id="deal-description" rows="4" placeholder="Description (optional)"
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <input type="text" id="deal-price" placeholder="Price (e.g., $19.99)" required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none">
+                    </div>
+                    <div>
+                        <input type="url" id="deal-link" placeholder="Deal Link (e.g., https://example.com)" required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none">
+                    </div>
+                    <div>
+                        <select id="deal-category"
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none">
+                            <option value="all">All</option>
+                            <option value="tech">Tech</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="travel">Travel</option>
+                            <option value="experiences">Experiences</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="submit-btn"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-md text-base font-medium transition">
+                        Submit Deal
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Search and Filter Bar -->
+        <section class="max-w-5xl mx-auto mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                    <input type="text" id="search-input" placeholder="Search deals..."
+                        class="search-input w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none">
+                </div>
+                <div class="w-full md:w-1/4">
+                    <select id="category-filter"
+                        class="filter-select w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none">
+                        <option value="all">All Categories</option>
+                        <option value="tech">Tech</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="travel">Travel</option>
+                        <option value="experiences">Experiences</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deal Grid -->
+        <section class="max-w-5xl mx-auto">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Latest Deals</h2>
+            
+            <div id="deal-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Sample Deal Cards -->
+                <div class="deal-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">50% Off Wireless Earbuds</h3>
+                        <p class="text-gray-600 text-sm mb-3">Premium sound quality with noise cancellation and 30-hour battery life.</p>
+                        <p class="text-green-600 font-bold mb-2">$49.99</p>
+                        <p class="text-gray-500 text-xs mb-4">Posted by techlover22</p>
+                        <a href="#" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                            View Deal
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="deal-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Summer Fashion Sale</h3>
+                        <p class="text-gray-600 text-sm mb-3">Up to 70% off on selected summer clothing and accessories.</p>
+                        <p class="text-green-600 font-bold mb-2">From $9.99</p>
+                        <p class="text-gray-500 text-xs mb-4">Posted by fashionista</p>
+                        <a href="#" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                            View Deal
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="deal-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Weekend Getaway Package</h3>
+                        <p class="text-gray-600 text-sm mb-3">2-night stay at luxury resort with breakfast included.</p>
+                        <p class="text-green-600 font-bold mb-2">$199 per person</p>
+                        <p class="text-gray-500 text-xs mb-4">Posted by travelguru</p>
+                        <a href="#" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                            View Deal
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="deal-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Gaming Laptop Special</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-performance gaming laptop with RTX 3060 and 16GB RAM.</p>
+                        <p class="text-green-600 font-bold mb-2">$899.99</p>
+                        <p class="text-gray-500 text-xs mb-4">Posted by gamerpro</p>
+                        <a href="#" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                            View Deal
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="deal-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Spa Day Experience</h3>
+                        <p class="text-gray-600 text-sm mb-3">Full day spa package including massage, facial, and lunch.</p>
+                        <p class="text-green-600 font-bold mb-2">$129 (Reg. $199)</p>
+                        <p class="text-gray-500 text-xs mb-4">Posted by relaxnow</p>
+                        <a href="#" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                            View Deal
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="deal-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Smartwatch Deal</h3>
+                        <p class="text-gray-600 text-sm mb-3">Latest model with health tracking and 7-day battery life.</p>
+                        <p class="text-green-600 font-bold mb-2">$149.99</p>
+                        <p class="text-gray-500 text-xs mb-4">Posted by gadgetfan</p>
+                        <a href="#" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                            View Deal
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Empty State (hidden by default) -->
+            <div id="empty-state" class="hidden text-center py-12">
+                <p class="text-gray-500 text-lg">No deals yet. Be the first to post one!</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        
+        // Form Submission
+        const dealForm = document.getElementById('deal-form');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        dealForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const title = document.getElementById('deal-title').value;
+            const description = document.getElementById('deal-description').value;
+            const price = document.getElementById('deal-price').value;
+            const link = document.getElementById('deal-link').value;
+            const category = document.getElementById('deal-category').value;
+            
+            // In a real app, you would send this data to your backend
+            console.log('Deal submitted:', { title, description, price, link, category });
+            
+            // Show success message
+            alert('Deal submitted successfully!');
+            
+            // Reset form
+            dealForm.reset();
+        });
+        
+        // Search Functionality
+        const searchInput = document.getElementById('search-input');
+        const dealCards = document.querySelectorAll('.deal-card');
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            dealCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p:nth-of-type(1)').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // Category Filter
+        const categoryFilter = document.getElementById('category-filter');
+        
+        categoryFilter.addEventListener('change', () => {
+            const selectedCategory = categoryFilter.value;
+            
+            dealCards.forEach(card => {
+                // In a real app, you would filter based on actual category data
+                // For this demo, we'll just show all cards when "all" is selected
+                if (selectedCategory === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    // This is a placeholder - in a real app, you would check the card's category
+                    card.style.display = 'block';
+                }
+            });
+        });
+        
+        // Toggle empty state if no deals (for demo purposes, always showing deals)
+        // document.getElementById('empty-state').classList.remove('hidden');
+        // document.getElementById('deal-grid').classList.add('hidden');
+    </script>
+</body>
+</html>
