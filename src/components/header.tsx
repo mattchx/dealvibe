@@ -1,7 +1,5 @@
-"use client"
-
 import { useState } from "react"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 import { Search, Bell, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -16,7 +14,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <span className="text-2xl font-bold">DealVibe</span>
           </Link>
 
@@ -32,13 +30,13 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-4">
-            <Link href="/categories" className="hover:text-blue-100 transition-colors">
+            <Link to="/categories" className="hover:text-blue-100 transition-colors">
               Categories
             </Link>
-            <Link href="/trending" className="hover:text-blue-100 transition-colors">
+            <Link to="/trending" className="hover:text-blue-100 transition-colors">
               Trending
             </Link>
-            <Link href="/leaderboard" className="hover:text-blue-100 transition-colors">
+            <Link to="/leaderboard" className="hover:text-blue-100 transition-colors">
               Leaderboard
             </Link>
             <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-700">
@@ -81,13 +79,13 @@ export default function Header() {
           )}
         >
           <nav className="flex flex-col space-y-4">
-            <Link href="/categories" className="hover:text-blue-100 transition-colors">
+            <Link to="/categories" className="hover:text-blue-100 transition-colors">
               Categories
             </Link>
-            <Link href="/trending" className="hover:text-blue-100 transition-colors">
+            <Link to="/trending" className="hover:text-blue-100 transition-colors">
               Trending
             </Link>
-            <Link href="/leaderboard" className="hover:text-blue-100 transition-colors">
+            <Link to="/leaderboard" className="hover:text-blue-100 transition-colors">
               Leaderboard
             </Link>
             <div className="flex space-x-2 pt-2">

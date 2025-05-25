@@ -2,8 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ThumbsUp, ThumbsDown, MessageSquare, Clock } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
+import { Link } from "react-router-dom"
 
 interface DealCardProps {
   id: string
@@ -51,13 +50,12 @@ export default function DealCard({
   return (
     <Card className="overflow-hidden h-full flex flex-col hover:shadow-md transition-shadow">
       <div className="relative">
-        <Link href={`/deals/${id}`}>
+        <Link to={`/deals/${id}`}>
           <div className="aspect-video relative overflow-hidden">
-            <Image
+            <img
               src={imageUrl || "/placeholder.svg"}
               alt={title}
-              fill
-              className="object-cover transition-transform hover:scale-105"
+              className="object-cover transition-transform hover:scale-105 w-full h-full"
             />
           </div>
         </Link>
@@ -78,14 +76,14 @@ export default function DealCard({
 
       <CardHeader className="p-4 pb-2">
         <div className="flex justify-between items-start gap-2">
-          <Link href={`/deals/${id}`} className="hover:underline">
+          <Link to={`/deals/${id}`} className="hover:underline">
             <h3 className="font-bold text-lg line-clamp-2">{title}</h3>
           </Link>
         </div>
         <div className="flex items-center mt-1 text-sm text-muted-foreground">
           <span>{merchant}</span>
           <span className="mx-2">•</span>
-          <Link href={`/category/${category.toLowerCase()}`} className="hover:underline">
+          <Link to={`/category/${category.toLowerCase()}`} className="hover:underline">
             {category}
           </Link>
         </div>
@@ -129,7 +127,7 @@ export default function DealCard({
             <span className="ml-1 text-xs">{votes.down}</span>
           </button>
           <Link
-            href={`/deals/${id}#comments`}
+            to={`/deals/${id}#comments`}
             className="inline-flex items-center justify-center p-1 rounded-md hover:bg-accent"
           >
             <MessageSquare className="h-4 w-4" />
@@ -142,7 +140,7 @@ export default function DealCard({
             <AvatarImage src={postedBy.avatar || "/placeholder.svg"} alt={postedBy.name} />
             <AvatarFallback>{postedBy.name.charAt(0)}</AvatarFallback>
           </Avatar>
-          <Link href={`/user/${postedBy.name.toLowerCase()}`} className="ml-2 text-xs hover:underline">
+          <Link to={`/user/${postedBy.name.toLowerCase()}`} className="ml-2 text-xs hover:underline">
             {postedBy.name}
           </Link>
         </div>

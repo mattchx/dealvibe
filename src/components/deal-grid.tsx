@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import DealCard from "./deal-card"
 import { mockDeals } from "@/lib/mock-data"

@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export default function Footer() {
   return (
@@ -16,22 +16,22 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Explore</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/categories" className="text-muted-foreground hover:text-foreground">
+                <Link to="/categories" className="text-muted-foreground hover:text-foreground">
                   Categories
                 </Link>
               </li>
               <li>
-                <Link href="/trending" className="text-muted-foreground hover:text-foreground">
+                <Link to="/trending" className="text-muted-foreground hover:text-foreground">
                   Trending Deals
                 </Link>
               </li>
               <li>
-                <Link href="/merchants" className="text-muted-foreground hover:text-foreground">
+                <Link to="/merchants" className="text-muted-foreground hover:text-foreground">
                   Merchants
                 </Link>
               </li>
               <li>
-                <Link href="/leaderboard" className="text-muted-foreground hover:text-foreground">
+                <Link to="/leaderboard" className="text-muted-foreground hover:text-foreground">
                   Leaderboard
                 </Link>
               </li>
@@ -42,22 +42,22 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Community</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/guidelines" className="text-muted-foreground hover:text-foreground">
+                <Link to="/guidelines" className="text-muted-foreground hover:text-foreground">
                   Guidelines
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-muted-foreground hover:text-foreground">
+                <Link to="/faq" className="text-muted-foreground hover:text-foreground">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-muted-foreground hover:text-foreground">
+                <Link to="/blog" className="text-muted-foreground hover:text-foreground">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-foreground">
+                <Link to="/contact" className="text-muted-foreground hover:text-foreground">
                   Contact Us
                 </Link>
               </li>
@@ -68,17 +68,17 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/terms" className="text-muted-foreground hover:text-foreground">
+                <Link to="/terms" className="text-muted-foreground hover:text-foreground">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
+                <Link to="/privacy" className="text-muted-foreground hover:text-foreground">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/cookies" className="text-muted-foreground hover:text-foreground">
+                <Link to="/cookies" className="text-muted-foreground hover:text-foreground">
                   Cookie Policy
                 </Link>
               </li>
