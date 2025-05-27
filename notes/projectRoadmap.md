@@ -75,3 +75,46 @@
 - Performance optimization opportunities with Vite
 - Potential for code splitting improvements
 - Enhanced development experience with Vite's faster HMR
+
+## Project Reorganization Plan
+### New Directory Structure
+```
+dealvibe/
+├── client/            # Frontend application
+│   ├── src/          # Source code
+│   │   ├── components/
+│   │   ├── routes/
+│   │   ├── lib/
+│   │   ├── styles/
+│   │   └── hooks/
+│   ├── public/       # Static assets
+│   └── [config files]
+├── server/           # Backend application (minimal structure)
+└── notes/           # Project documentation
+```
+
+### Implementation Tasks
+1. Directory Restructuring
+   - [ ] Create client/ and server/ directories
+   - [ ] Move src/ under client/
+   - [ ] Move public/ under client/
+   - [ ] Relocate configuration files to client/
+   - [ ] Create minimal server/ structure
+
+2. Next.js Cleanup
+   - [ ] Remove app/ directory
+   - [ ] Remove next.config.mjs
+   - [ ] Remove postcss.config.mjs (keep .js version)
+   - [ ] Remove vite-temp/ directory
+
+3. Configuration Updates
+   - [ ] Update import paths in source files
+   - [ ] Adjust build configuration paths
+   - [ ] Update TypeScript config paths
+   - [ ] Verify static asset references
+
+4. Validation
+   - [ ] Test development server
+   - [ ] Verify component imports
+   - [ ] Check static asset loading
+   - [ ] Validate build process

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"

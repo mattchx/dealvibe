@@ -1,7 +1,8 @@
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Layout from './routes/layout'
-import HomePage from './routes/home'
-import DealPage from './routes/deal'
+import Layout from '@/routes/layout'
+import HomePage from '@/routes/home'
+import DealPage from '@/routes/deal'
 import { ErrorBoundary } from '@/components/error-boundary'
 
 function App() {
