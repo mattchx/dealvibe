@@ -39,6 +39,12 @@ export default function Header() {
             <Link to="/leaderboard" className="hover:text-blue-100 transition-colors">
               Leaderboard
             </Link>
+            <Button
+              asChild
+              className="bg-yellow-500 text-black hover:bg-yellow-400 font-semibold"
+            >
+              <Link to="/submit">Submit Deal</Link>
+            </Button>
             <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-700">
               Sign In
             </Button>
@@ -89,6 +95,12 @@ export default function Header() {
               Leaderboard
             </Link>
             <div className="flex space-x-2 pt-2">
+              <Button
+                asChild
+                className="flex-1 bg-yellow-500 text-black hover:bg-yellow-400 font-semibold"
+              >
+                <Link to="/submit">Submit Deal</Link>
+              </Button>
               <Button variant="outline" className="flex-1 border-white text-white hover:bg-white hover:text-blue-700">
                 Sign In
               </Button>

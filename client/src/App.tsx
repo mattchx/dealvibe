@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from '@/routes/layout'
 import HomePage from '@/routes/home'
 import DealPage from '@/routes/deal'
+import SubmitDealPage from '@/routes/submit-deal'
 import { ErrorBoundary } from '@/components/error-boundary'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="privacy" element={<div>Privacy Policy Page</div>} />
         <Route path="cookies" element={<div>Cookie Policy Page</div>} />
         <Route path="/deals/:id" element={<DealPage />} />
+        <Route path="/submit" element={<SubmitDealPage />} />
         <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Route>
       </Routes>

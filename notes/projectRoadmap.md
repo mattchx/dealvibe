@@ -1,120 +1,125 @@
-# Project Roadmap: Next.js to Vite React Conversion
+# Project Roadmap: DealVibe Implementation
 
 ## Project Goals
-- Convert the existing Next.js application to use Vite + React while maintaining all functionality
-- Ensure smooth development experience with hot module replacement
-- Maintain TypeScript support and type safety
-- Preserve existing UI components and styling
+- Implement core deal posting functionality with Better Auth and Turso
+- Create an engaging, user-friendly deal sharing platform
+- Ensure responsive, mobile-first design
+- Build foundation for social features and gamification
 
-## Key Features to Maintain
+## Immediate Features
 - [x] React with TypeScript support
-- [ ] Tailwind CSS integration
-- [ ] All UI components (shadcn/ui components)
-- [ ] Theme switching functionality
-- [ ] Static asset serving
-- [ ] Component organization
-- [ ] Development server hot reload
+- [ ] Deal posting system with real-time preview
+- [ ] User authentication via Better Auth
+- [ ] Turso database integration
+- [ ] Mobile-responsive UI
+- [ ] Image upload and optimization
+
+## Upcoming Features
+- [ ] Comment system
+- [ ] Upvote functionality
+- [ ] Deal lists/wishlists
+- [ ] Gamification elements
 
 ## Technical Requirements
-1. Build System Migration
-   - [ ] Replace Next.js build system with Vite
-   - [ ] Configure Vite for TypeScript support
-   - [ ] Set up Vite's static asset handling
-   - [ ] Configure environment variables
 
-2. Routing System
-   - [ ] Replace Next.js file-based routing with React Router
-   - [ ] Set up route configurations
-   - [ ] Implement layouts and nested routes
+1. Deal Posting System (Priority)
+   - [ ] Create submission form with real-time validation
+   - [ ] Implement side-by-side preview
+   - [ ] Set up image upload pipeline
+   - [ ] Configure Turso database schema
+   - [ ] Implement Better Auth integration
+   - [ ] Add auto-save draft functionality
 
-3. Component Updates
-   - [ ] Update component imports and exports
-   - [ ] Adapt components to work without Next.js specific features
-   - [ ] Maintain shadcn/ui component functionality
+2. UI Components
+   - [ ] Enhanced deal card component
+   - [ ] Real-time preview component
+   - [ ] Form validation feedback
+   - [ ] Mobile-responsive layouts
+   - [ ] Image optimization display
 
-4. Styling System
-   - [ ] Configure Tailwind CSS with Vite
-   - [ ] Maintain existing styling utilities
-   - [ ] Update any Next.js specific style imports
+3. Backend Integration
+   - [ ] Set up Turso database connections
+   - [ ] Create API endpoints
+   - [ ] Configure Better Auth flow
+   - [ ] Implement image processing
+   - [ ] Add URL validation service
 
-5. Development Experience
-   - [ ] Set up development server
-   - [ ] Configure hot module replacement
-   - [ ] Update npm scripts
-   - [ ] Configure linting and TypeScript
+4. Development Experience
+   - [ ] Configure TypeScript for new components
+   - [ ] Set up testing environment
+   - [ ] Implement error tracking
+   - [ ] Add performance monitoring
 
 ## Completion Criteria
-- All components render correctly
-- Development server runs without errors
-- Build process completes successfully
-- Type checking passes
-- Styling system works as expected
-- All routes work correctly
-- Theme switching functions properly
+- Deal submission works end-to-end
+- Real-time preview functions correctly
+- Form validation provides clear feedback
+- Images upload and optimize properly
+- Mobile experience is smooth
+- Authentication flow works seamlessly
+- Data persists correctly in Turso
 
-## Migration Steps
-1. Initial Setup
-   - [ ] Create new Vite project structure
-   - [ ] Configure TypeScript
-   - [ ] Set up Tailwind CSS
+## Implementation Steps
+1. Foundation (Week 1)
+   - [ ] Set up project structure
+   - [ ] Configure Better Auth
+   - [ ] Initialize Turso database
+   - [ ] Create base components
 
-2. Core Migration
-   - [ ] Migrate components
-   - [ ] Set up routing
-   - [ ] Configure static assets
+2. Core Features (Week 2-3)
+   - [ ] Build deal submission form
+   - [ ] Implement real-time preview
+   - [ ] Add image upload
+   - [ ] Create API endpoints
 
-3. Build & Deploy
-   - [ ] Configure build process
-   - [ ] Test production build
-   - [ ] Update deployment scripts
+3. Polish & Launch (Week 3-4)
+   - [ ] Add form validation
+   - [ ] Implement auto-save
+   - [ ] Mobile optimization
+   - [ ] Performance testing
 
 ## Completed Tasks
 - Created project documentation structure
+- Designed database schema
+- Planned feature implementation
+- Created detailed technical specifications
 
 ## Future Considerations
-- Performance optimization opportunities with Vite
-- Potential for code splitting improvements
-- Enhanced development experience with Vite's faster HMR
+- Scaling the comment system
+- Implementing gamification features
+- Adding deal lists/wishlists
+- Enhancing mobile experience
+- Integration with external APIs
 
-## Project Reorganization Plan
-### New Directory Structure
+## Project Structure
 ```
 dealvibe/
-├── client/            # Frontend application
-│   ├── src/          # Source code
+├── client/
+│   ├── src/
 │   │   ├── components/
-│   │   ├── routes/
+│   │   │   ├── deals/           # Deal-related components
+│   │   │   ├── auth/            # Authentication components
+│   │   │   └── ui/             # Shared UI components
 │   │   ├── lib/
-│   │   ├── styles/
-│   │   └── hooks/
-│   ├── public/       # Static assets
-│   └── [config files]
-├── server/           # Backend application (minimal structure)
-└── notes/           # Project documentation
+│   │   │   ├── api/            # API integration
+│   │   │   └── utils/          # Shared utilities
+│   │   └── styles/
+├── server/
+│   └── src/
+│       ├── routes/             # API routes
+│       └── db/                 # Database schemas
+└── notes/                     # Documentation
 ```
 
-### Implementation Tasks
-1. Directory Restructuring
-   - [ ] Create client/ and server/ directories
-   - [ ] Move src/ under client/
-   - [ ] Move public/ under client/
-   - [ ] Relocate configuration files to client/
-   - [ ] Create minimal server/ structure
+## Next Steps
+1. Begin deal posting implementation
+   - [ ] Create form components
+   - [ ] Set up database
+   - [ ] Implement authentication
+   - [ ] Add image handling
 
-2. Next.js Cleanup
-   - [ ] Remove app/ directory
-   - [ ] Remove next.config.mjs
-   - [ ] Remove postcss.config.mjs (keep .js version)
-   - [ ] Remove vite-temp/ directory
-
-3. Configuration Updates
-   - [ ] Update import paths in source files
-   - [ ] Adjust build configuration paths
-   - [ ] Update TypeScript config paths
-   - [ ] Verify static asset references
-
-4. Validation
-   - [ ] Test development server
-   - [ ] Verify component imports
-   - [ ] Check static asset loading
-   - [ ] Validate build process
+2. Testing & Validation
+   - [ ] Unit tests
+   - [ ] Integration tests
+   - [ ] Mobile testing
+   - [ ] Performance validation
