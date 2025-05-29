@@ -13,7 +13,7 @@ interface DealCardProps {
   originalPrice: number
   discount: number
   imageUrl: string
-  merchant: string
+  merchant?: string
   category: string
   tags: string[]
   postedBy: {
@@ -82,8 +82,12 @@ export default function DealCard({
           </Link>
         </div>
         <div className="flex items-center mt-1 text-sm text-muted-foreground">
-          <span>{merchant}</span>
-          <span className="mx-2">•</span>
+          {merchant && (
+            <>
+              <span>{merchant}</span>
+              <span className="mx-2">•</span>
+            </>
+          )}
           <Link to={`/category/${category.toLowerCase()}`} className="hover:underline">
             {category}
           </Link>

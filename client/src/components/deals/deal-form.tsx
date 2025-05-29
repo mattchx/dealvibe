@@ -76,7 +76,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Deal Title</FormLabel>
+                  <FormLabel>Deal Title (Required)</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter the deal title" {...field} />
                   </FormControl>
@@ -90,7 +90,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Description (Required)</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Describe the deal"
@@ -109,7 +109,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Deal Price</FormLabel>
+                    <FormLabel>Deal Price (Required)</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -130,7 +130,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                 name="originalPrice"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Original Price</FormLabel>
+                    <FormLabel>Original Price (Required)</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -152,7 +152,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
               name="merchant"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Merchant</FormLabel>
+                  <FormLabel>Merchant (Optional)</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter merchant name" {...field} />
                   </FormControl>
@@ -166,7 +166,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>Category (Required)</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
@@ -191,7 +191,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
               name="url"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Deal URL</FormLabel>
+                  <FormLabel>Deal URL (Optional)</FormLabel>
                   <FormControl>
                     <Input placeholder="https://..." {...field} />
                   </FormControl>
@@ -205,7 +205,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
               name="imageUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Image URL (optional)</FormLabel>
+                  <FormLabel>Image URL (Optional)</FormLabel>
                   <FormControl>
                     <Input placeholder="https://..." {...field} />
                   </FormControl>
@@ -219,7 +219,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
               name="tags"
               render={() => (
                 <FormItem>
-                  <FormLabel>Tags</FormLabel>
+                  <FormLabel>Tags (Required)</FormLabel>
                   <div className="space-y-2">
                     <div className="flex gap-2">
                       <Input
