@@ -300,7 +300,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
         </Form>
       </Card>
 
-      <div className="lg:sticky lg:top-4 space-y-4">
+      <div className="lg:sticky lg:top-4 space-y-4 h-fit">
         <h3 className="font-semibold text-lg">Preview</h3>
         <DealCard {...previewData} />
       </div>

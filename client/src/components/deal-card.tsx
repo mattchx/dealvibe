@@ -49,7 +49,7 @@ export default function DealCard({
   isVerified = false,
 }: DealCardProps) {
   return (
-    <Card className="overflow-hidden h-full flex flex-col hover:shadow-md transition-shadow">
+    <Card className="overflow-hidden flex flex-col hover:shadow-md transition-shadow">
       <div className="relative">
         {imageUrl && (
           <Link to={`/deals/${id}`}>
@@ -96,7 +96,7 @@ export default function DealCard({
         </div>
       </CardHeader>
 
-      <CardContent className="p-4 pt-2 pb-3 flex-grow">
+      <CardContent className="p-4 pt-2 pb-3">
         <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</p>
 
         <div className="flex items-baseline gap-2 mb-3">
