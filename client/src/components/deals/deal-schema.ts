@@ -11,11 +11,11 @@ export const dealSchema = z.object({
     .max(500, "Description must not exceed 500 characters"),
   price: z
     .number()
-    .min(0, "Price must be greater than or equal to 0")
+    .min(0.01, "Price must be greater than 0")
     .max(999999.99, "Price must not exceed 999,999.99"),
   originalPrice: z
     .number()
-    .min(0, "Original price must be greater than or equal to 0")
+    .min(0.01, "Original price must be greater than 0")
     .max(999999.99, "Original price must not exceed 999,999.99"),
   merchant: z
     .string()

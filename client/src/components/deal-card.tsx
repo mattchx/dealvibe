@@ -51,15 +51,17 @@ export default function DealCard({
   return (
     <Card className="overflow-hidden h-full flex flex-col hover:shadow-md transition-shadow">
       <div className="relative">
-        <Link to={`/deals/${id}`}>
-          <div className="aspect-video relative overflow-hidden">
-            <img
-              src={imageUrl || "/placeholder.svg"}
-              alt={title}
-              className="object-cover transition-transform hover:scale-105 w-full h-full"
-            />
-          </div>
-        </Link>
+        {imageUrl && (
+          <Link to={`/deals/${id}`}>
+            <div className="aspect-video relative overflow-hidden">
+              <img
+                src={imageUrl}
+                alt={title}
+                className="object-cover transition-transform hover:scale-105 w-full h-full"
+              />
+            </div>
+          </Link>
+        )}
 
         {isExpiring && (
           <Badge variant="destructive" className="absolute top-2 right-2 flex items-center">
@@ -99,7 +101,7 @@ export default function DealCard({
 
         <div className="flex items-baseline gap-2 mb-3">
           <span className="text-xl font-bold text-green-600 dark:text-green-500">${price.toFixed(2)}</span>
-          {originalPrice > price && (
+          {originalPrice > 0 && (
             <span className="text-sm line-through text-muted-foreground">${originalPrice.toFixed(2)}</span>
           )}
           {discount > 0 && (
