@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/card"
 import DealCard from "@/components/deal-card"
 import { dealSchema, type DealFormData, CATEGORIES } from "./deal-schema"
 import { cn } from "@/lib/utils"
-
+import { Progress } from "@/components/ui/progress"
 interface DealFormProps {
   onSubmit: (data: DealFormData) => Promise<void>
   className?: string
@@ -19,6 +19,9 @@ interface DealFormProps {
 export function DealForm({ onSubmit, className }: DealFormProps) {
   const [tags, setTags] = useState<string[]>([])
   const [tagInput, setTagInput] = useState("")
+  const [currentStep, setCurrentStep] = useState(0)
+
+  const MAX_STEPS = 3; // Basic Info, Pricing, Details
 
   const form = useForm<DealFormData>({
     resolver: zodResolver(dealSchema),
@@ -48,6 +51,27 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
     form.setValue("tags", tags.filter((tag) => tag !== tagToRemove))
   }, [tags, form])
 
+  const nextStep = async () => {
+    let isValid = false;
+    if (currentStep === 0) {
+      isValid = await form.trigger(["title", "description"]);
+    } else if (currentStep === 1) {
+      isValid = await form.trigger(["price", "originalPrice"]);
+    } else if (currentStep === 2) {
+      isValid = await form.trigger(["merchant", "category", "url", "imageUrl", "tags"]);
+    }
+
+    if (isValid && currentStep < MAX_STEPS - 1) {
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1);
+    }
+  };
+
   const watchedFields = form.watch()
   const discount = watchedFields.originalPrice && watchedFields.price
     ? Math.round(((watchedFields.originalPrice - watchedFields.price) / watchedFields.originalPrice) * 100)
@@ -68,27 +92,42 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
     isVerified: false
   }
 
+  const handleSubmit = async (data: DealFormData) => {
+    if (currentStep === MAX_STEPS - 1) {
+      await onSubmit(data);
+    }
+  };
+
+  const progressValue = ((currentStep + 1) / MAX_STEPS) * 100;
+
   return (
     <div className={cn("grid grid-cols-1 lg:grid-cols-2 gap-6", className)}>
       <Card className="p-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            {/* Basic Information Section */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="font-semibold">Basic Information</h3>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+            <div className="mb-6">
+              <Progress value={progressValue} className="w-full" />
+              <p className="text-center text-sm text-muted-foreground mt-2">
+                Step {currentStep + 1} of {MAX_STEPS}
+              </p>
+            </div>
+
+            {/* Step 1: Basic Information Section */}
+            {currentStep === 0 && (
+              <div className="space-y-6">
+                <h3 className="font-semibold text-lg">Basic Information</h3>
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Deal Title (Required)</FormLabel>
+                      <FormLabel className="text-base">Deal Title</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., 50% off Nike Air Max Sneakers" {...field} />
                       </FormControl>
                       <FormMessage />
                       <p className="text-sm text-muted-foreground">
-                        Be specific and include key details like brand, model, or discount
+                        Be specific and include key details.
                       </p>
                     </FormItem>
                   )}
@@ -99,33 +138,35 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description (Required)</FormLabel>
+                      <FormLabel className="text-base">Description</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="e.g., Limited time offer on the latest Nike Air Max. All sizes available. Free shipping on orders over $50."
+                          placeholder="e.g., Limited time offer. All sizes available. Free shipping on orders over $50."
                           className="resize-none"
                           {...field}
                         />
                       </FormControl>
                       <FormMessage />
                       <p className="text-sm text-muted-foreground">
-                        Include important details like conditions, shipping info, and any restrictions
+                        Include important details like conditions and restrictions.
                       </p>
                     </FormItem>
                   )}
                 />
               </div>
+            )}
 
-              {/* Pricing Information Section */}
-              <div className="space-y-4">
-                <h3 className="font-semibold">Pricing Information</h3>
+            {/* Step 2: Pricing Information Section */}
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <h3 className="font-semibold text-lg">Pricing Information</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Deal Price (Required)</FormLabel>
+                        <FormLabel className="text-base">Deal Price</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -138,7 +179,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                         </FormControl>
                         <FormMessage />
                         <p className="text-sm text-muted-foreground">
-                          Enter the current deal price
+                          Enter the current deal price.
                         </p>
                       </FormItem>
                     )}
@@ -149,7 +190,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                     name="originalPrice"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Original Price (Required)</FormLabel>
+                        <FormLabel className="text-base">Original Price</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -162,23 +203,25 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                         </FormControl>
                         <FormMessage />
                         <p className="text-sm text-muted-foreground">
-                          Enter the regular price before discount
+                          Enter the regular price before discount.
                         </p>
                       </FormItem>
                     )}
                   />
                 </div>
               </div>
+            )}
 
-              {/* Deal Details Section */}
-              <div className="space-y-4">
-                <h3 className="font-semibold">Deal Details</h3>
+            {/* Step 3: Deal Details Section */}
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <h3 className="font-semibold text-lg">Deal Details</h3>
                 <FormField
                   control={form.control}
                   name="merchant"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Merchant (Optional)</FormLabel>
+                      <FormLabel className="text-base">Merchant (Optional)</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., Amazon, Nike, Best Buy" {...field} />
                       </FormControl>
@@ -195,7 +238,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Category (Required)</FormLabel>
+                      <FormLabel className="text-base">Category</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
@@ -220,13 +263,13 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="url"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Deal URL (Optional)</FormLabel>
+                      <FormLabel className="text-base">Deal URL (Optional)</FormLabel>
                       <FormControl>
                         <Input placeholder="https://www.example.com/product" {...field} />
                       </FormControl>
                       <FormMessage />
                       <p className="text-sm text-muted-foreground">
-                        Direct link to the product or deal page
+                        Direct link to the product or deal page.
                       </p>
                     </FormItem>
                   )}
@@ -237,13 +280,13 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Image URL (Optional)</FormLabel>
+                      <FormLabel className="text-base">Image URL (Optional)</FormLabel>
                       <FormControl>
                         <Input placeholder="https://www.example.com/product-image.jpg" {...field} />
                       </FormControl>
                       <FormMessage />
                       <p className="text-sm text-muted-foreground">
-                        Add a product image URL to make your deal more appealing
+                        Add a product image URL to make your deal more appealing.
                       </p>
                     </FormItem>
                   )}
@@ -254,7 +297,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="tags"
                   render={() => (
                     <FormItem>
-                      <FormLabel>Tags (Required)</FormLabel>
+                      <FormLabel className="text-base">Tags</FormLabel>
                       <div className="space-y-2">
                         <div className="flex gap-2">
                           <Input
@@ -283,7 +326,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                           ))}
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          Add 1-5 relevant tags to help others find your deal
+                          Add 1-5 relevant tags.
                         </p>
                         <FormMessage />
                       </div>
@@ -291,10 +334,24 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   )}
                 />
               </div>
-            </div>
+            )}
 
-            <div className="border-t pt-6">
-              <Button type="submit" className="w-full">Submit Deal</Button>
+            <div className="border-t pt-6 flex justify-between">
+              {currentStep > 0 && (
+                <Button type="button" onClick={prevStep} variant="outline">
+                  Previous
+                </Button>
+              )}
+              {currentStep < MAX_STEPS - 1 && (
+                <Button type="button" onClick={nextStep} className="ml-auto">
+                  Next
+                </Button>
+              )}
+              {currentStep === MAX_STEPS - 1 && (
+                <Button type="submit" className="w-full">
+                  Submit Deal
+                </Button>
+              )}
             </div>
           </form>
         </Form>
