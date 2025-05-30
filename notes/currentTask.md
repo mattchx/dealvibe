@@ -1,43 +1,27 @@
-# Current Task: Next.js to Vite React Migration
+# Current Task: Refine Color Styles for Forms
 
 ## Current Objectives
-1. Analyze existing Next.js application structure and dependencies
-2. Plan migration strategy for moving to Vite
-3. Identify potential challenges and solutions
+1. Address user feedback: "The form is too busy."
+2. Refine dark theme color variables in `client/src/styles/globals.css` to reduce visual clutter in forms.
+3. Ensure form elements (inputs, borders, labels) have appropriate contrast without being overly prominent.
 
 ## Current Context
 ### Project Structure
 - React + TypeScript application
 - Uses shadcn/ui components extensively
 - Tailwind CSS for styling
-- Next.js routing system
-- Static assets in public directory
+- Color variables are defined in `client/src/styles/globals.css` using HSL values.
+- The `client/src/components/deals/deal-form.tsx` is a key form component.
 
-### Dependencies to Consider
-- Core: React, React DOM, TypeScript
-- UI: Multiple Radix UI components
-- Styling: Tailwind CSS, tailwind-merge
-- Forms: react-hook-form, zod
-- Other: date-fns, recharts, sonner
+### Relevant Files
+- `client/tailwind.config.ts`: Defines Tailwind CSS configuration, including color names.
+- `client/src/styles/globals.css`: Defines the actual HSL values for light and dark themes.
 
 ## Next Steps
-1. Initial Setup
-   - Set up new Vite configuration
-   - Configure TypeScript and required dependencies
-   - Set up Tailwind CSS with Vite
-
-2. Migration Process
-   - Update component imports/exports
-   - Configure routing system
-   - Migrate UI components
-   - Update asset handling
-
-3. Testing & Validation
-   - Verify component rendering
-   - Test routing functionality
-   - Validate styling system
-   - Check build process
+1. Propose refined color changes to `client/src/styles/globals.css`, specifically for `--muted-foreground`, `--border`, and `--input`.
+2. Apply the refined color changes to `client/src/styles/globals.css`.
+3. Verify the visual appearance of forms, particularly `client/src/components/deals/deal-form.tsx`.
 
 ## References
-- Related tasks in projectRoadmap.md: "Build System Migration", "Component Updates"
-- Technical stack details to be documented in techStack.md
+- Related tasks in projectRoadmap.md: "Enhance UI/UX", "Overhaul color styles (lighter dark mode)"
+- Technical stack details in techStack.md

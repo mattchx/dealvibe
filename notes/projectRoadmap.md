@@ -9,6 +9,7 @@
 ## Immediate Features
 - [x] React with TypeScript support
 - [ ] Deal posting system with real-time preview
+- [ ] Overhaul color styles (lighter dark mode)
 - [ ] User authentication via Better Auth
 - [ ] Turso database integration
 - [ ] Mobile-responsive UI
@@ -83,6 +84,7 @@
 - Designed database schema
 - Planned feature implementation
 - Created detailed technical specifications
+- Updated color styles for a lighter dark mode
 
 ## Future Considerations
 - Scaling the comment system
