@@ -58,7 +58,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
     } else if (currentStep === 1) {
       isValid = await form.trigger(["price", "originalPrice"]);
     } else if (currentStep === 2) {
-      isValid = await form.trigger(["merchant", "category", "url", "imageUrl", "tags"]);
+      isValid = await form.trigger(["category", "tags"]);
     }
 
     if (isValid && currentStep < MAX_STEPS - 1) {

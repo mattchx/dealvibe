@@ -19,16 +19,26 @@ export const dealSchema = z.object({
     .max(999999.99, "Original price must not exceed 999,999.99"),
   merchant: z
     .string()
-    .min(2, "Retailer name must be at least 2 characters")
-    .max(50, "Retailer name must not exceed 50 characters")
-    .optional(),
+    .optional()
+    .transform(val => val === "" ? undefined : val)
+    .pipe(
+      z.string()
+        .min(2, "Retailer name must be at least 2 characters")
+        .max(50, "Retailer name must not exceed 50 characters")
+        .optional()
+    ),
   category: z.string().min(1, "Please select a category"),
   tags: z.array(z.string()).min(1, "Add at least one tag").max(5, "Maximum 5 tags allowed"),
   url: z
     .string()
-    .url("Please enter a valid URL")
-    .max(500, "URL must not exceed 500 characters")
-    .optional(),
+    .optional()
+    .transform(val => val === "" ? undefined : val)
+    .pipe(
+      z.string()
+        .url("Please enter a valid URL")
+        .max(500, "URL must not exceed 500 characters")
+        .optional()
+    ),
   imageUrl: z.string().default("/placeholder.svg"),
   expiresAt: z.date().optional(),
 })
