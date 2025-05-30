@@ -17,7 +17,7 @@ interface DealFormProps {
 }
 
 export function DealForm({ onSubmit, className }: DealFormProps) {
-  const [tags, setTags] = useState<string[]>([])
+  const [tags, setTags] = useState<string[]>(["sale"])
   const [tagInput, setTagInput] = useState("")
   const [currentStep, setCurrentStep] = useState(0)
 
@@ -32,7 +32,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
       originalPrice: undefined,
       merchant: "",
       category: "",
-      tags: [],
+      tags: ["sale"],
       url: "",
       imageUrl: "",
     },
@@ -121,7 +121,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base">Deal Title</FormLabel>
+                      <FormLabel className="text-base">Deal Title *</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., 50% off Nike Air Max Sneakers" {...field} />
                       </FormControl>
@@ -138,7 +138,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base">Description</FormLabel>
+                      <FormLabel className="text-base">Description *</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="e.g., Limited time offer. All sizes available. Free shipping on orders over $50."
@@ -166,7 +166,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">Deal Price</FormLabel>
+                        <FormLabel className="text-base">Deal Price *</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -190,7 +190,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                     name="originalPrice"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-base">Original Price</FormLabel>
+                        <FormLabel className="text-base">Original Price *</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -238,7 +238,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base">Category</FormLabel>
+                      <FormLabel className="text-base">Category *</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
@@ -297,7 +297,7 @@ export function DealForm({ onSubmit, className }: DealFormProps) {
                   name="tags"
                   render={() => (
                     <FormItem>
-                      <FormLabel className="text-base">Tags</FormLabel>
+                      <FormLabel className="text-base">Tags *</FormLabel>
                       <div className="space-y-2">
                         <div className="flex gap-2">
                           <Input
